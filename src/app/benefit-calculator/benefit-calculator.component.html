@@ -1,0 +1,67 @@
+<div class="d-flex flex-column">
+  <div id="page-content">
+    <div class="container text-center">
+      <div class="row justify-content-center">
+        <div class="col-md-7">
+          <h1 class="font-weight-light mt-4 text-white">Benefit Cost Calculator</h1>
+          <p class="lead text-white-50">Use this calculator to determine to total cost of benefits.</p>
+        </div>
+      </div>
+    </div>
+    <div class="benefit-card">
+      <div class="card-block">
+        <div class="card-header">
+          <h4>Employee Cost Information</h4>
+        </div>
+        <form>
+          <benefit-cost-grid [insuredEntities]="[employee]"></benefit-cost-grid>
+          <hr />
+          <div class="card-header">
+            <h4>Dependent Cost Information</h4>
+            <small>A dependent can be a child or a spouse.</small>
+          </div>
+          <form>
+            <div *ngIf="showDuplicateDependentError" class="alert alert-danger" role="alert">
+              A dependent with that name has already been added.
+            </div>
+            <div class="row">
+              <div class="col-sm-8">
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" name="dependentName" placeholder="Dependent's name"
+                    [(ngModel)]="newDependentName">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" [disabled]="!newDependentName || newDependentName === ''"
+                      (click)="addDependent($event)">Add
+                      Dependent</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </form>
+        <div *ngIf="dependentCollection.length > 0">
+          <benefit-cost-grid [insuredEntities]="dependentCollection" [isDependentView]="true" (onRemove)="calculate()">
+          </benefit-cost-grid>
+        </div>
+      </div>
+    </div>
+    <div class="benefit-card" *ngIf="hasCalculated">
+      <div class="card-block">
+        <div>
+          <h3>Summary of Costs</h3>
+          <benefit-cost-grid *ngIf="insuredEntities.length > 0" [insuredEntities]="insuredEntities"
+            [isSummaryView]="true">
+          </benefit-cost-grid>
+        </div>
+        <section>
+          <benefit-total-grid [grossPay]="grossYearlyPay" [benefitCost]="benefitCost.totalCost" [label]="'Yearly'">
+          </benefit-total-grid>
+        </section>
+        <section>
+          <benefit-total-grid [grossPay]="grossPay" [benefitCost]="benefitCost.totalCostPerPaycheck"
+            [label]="'Per Paycheck'">
+          </benefit-total-grid>
+        </section>
+      </div>
+    </div>
+  </div>

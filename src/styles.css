@@ -1,0 +1,21 @@
+
+html,
+body,
+.container-fluid {
+  height: 100%;
+}
+
+#page-content {
+  flex: 1 0 auto;
+}
+
+body {
+  background: #007bff;
+  background: linear-gradient(to right, #0062E6, #33AEFF);
+  padding: 0; margin: 0;
+}
+
+.pull-right {
+  float: right;
+}
+

@@ -1,0 +1,27 @@
+<table class="table table-bordered">
+    <thead class="thead-light">
+      <tr>
+        <th colspan="2">{{label}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Gross Pay</td>
+        <td>{{ grossPay | currency:'USD':true:'1.2-2' }}</td>
+      </tr>
+      <tr>
+        <td>Benefit Cost</td>
+        <td> (- {{ benefitCost |  currency:'USD':true:'1.2-2'}})</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="pull-right">
+            Total:
+          </span>
+        </td>
+        <td>
+          {{ grossPay - benefitCost |  currency:'USD':true:'1.2-2'}}
+        </td>
+      </tr>
+    </tbody>
+  </table>

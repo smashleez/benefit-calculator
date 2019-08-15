@@ -1,0 +1,34 @@
+<table class="table table-bordered">
+  <thead class="thead-light">
+    <tr>
+      <th>Name</th>
+      <th>Cost</th>
+      <th>Discount</th>
+      <th>Cost/Year</th>
+      <th>Cost/PayCheck</th>
+      <th *ngIf="isDependentView"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let insuredEntity of insuredEntities">
+      <td>
+        <span *ngIf="isSummaryView === true">{{ insuredEntity.name }}</span>
+        <input *ngIf="isSummaryView === false" type="text" class="form-control" placeholder="Name" id="employeeName"
+          name="employeeName" [(ngModel)]="insuredEntity.name" (keyup)="calculateGrid($event)">
+      </td>
+      <td>{{ insuredEntity.costPerYear | currency:'USD':true:'1.2-2' }}</td>
+      <td>(- {{ insuredEntity.discount | currency:'USD':true:'1.2-2' }})</td>
+      <td>{{ insuredEntity.costAfterDiscountsPerYear | currency:'USD':true:'1.2-2'}}</td>
+      <td>{{ insuredEntity.costPerPaycheck | currency:'USD':true:'1.2-2' }}</td>
+      <td *ngIf="isDependentView"><button class="btn btn-link" (click)="remove(insuredEntity)"><small>Remove</small></button></td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="5">
+        *<small>Employees & Dependents with a name starting with 'A' gets a 10% discount.</small>
+      </td>
+      <td *ngIf="isDependentView"> </td>
+    </tr>
+  </tfoot>
+</table>
