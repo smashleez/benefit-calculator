@@ -18,14 +18,16 @@ export class BenefitCostGridComponent {
   @Input()
   public isDependentView: boolean = false;
 
+  @Output() onKeyUp: EventEmitter<any> = new EventEmitter();
   @Output() onRemove: EventEmitter<any> = new EventEmitter();
 
   constructor(private benefitCalculatorService: BenefitCalculatorService) { }
 
   calculateGrid() {
     this.benefitCalculatorService.calculateBenefits(this.insuredEntities);
+    this.onKeyUp.emit([this.insuredEntities]);
   }
-
+  
   remove(dependent) {
     let index = this.insuredEntities.indexOf(dependent);
     if (index > -1) {

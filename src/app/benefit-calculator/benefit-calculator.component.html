@@ -14,7 +14,7 @@
           <h4>Employee Cost Information</h4>
         </div>
         <form>
-          <benefit-cost-grid [insuredEntities]="[employee]"></benefit-cost-grid>
+          <benefit-cost-grid [insuredEntities]="[employee]" (onKeyUp)="calculate()"></benefit-cost-grid>
           <hr />
           <div class="card-header">
             <h4>Dependent Cost Information</h4>
@@ -27,12 +27,16 @@
             <div class="row">
               <div class="col-sm-8">
                 <div class="input-group mb-3">
-                  <input type="text" class="form-control" name="dependentName" placeholder="Dependent's name"
+                  <input type="text" 
+                    class="form-control" 
+                    name="dependentName" 
+                    placeholder="Dependent's name"
                     [(ngModel)]="newDependentName">
                   <div class="input-group-append">
-                    <button class="btn btn-primary" [disabled]="!newDependentName || newDependentName === ''"
-                      (click)="addDependent($event)">Add
-                      Dependent</button>
+                    <button class="btn btn-primary" 
+                      [disabled]="!newDependentName || newDependentName === ''"
+                      (click)="addDependent($event)">
+                      Add Dependent</button>
                   </div>
                 </div>
               </div>
@@ -58,7 +62,7 @@
           </benefit-total-grid>
         </section>
         <section>
-          <benefit-total-grid [grossPay]="grossPay" [benefitCost]="benefitCost.totalCostPerPaycheck"
+          <benefit-total-grid [grossPay]="grossPayPerPaycheck" [benefitCost]="benefitCost.totalCostPerPaycheck"
             [label]="'Per Paycheck'">
           </benefit-total-grid>
         </section>

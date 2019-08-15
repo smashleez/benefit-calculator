@@ -4,8 +4,6 @@ import { BenefitCost } from 'app/shared/models/benefit-cost.model';
 import { Dependent } from 'app/shared/models/dependent.model';
 import { BenefitCalculatorService } from './benefit-calculator.service';
 import { InsuredEntity } from 'app/shared/models/insured.model';
-import { YearlyPaycheck } from 'app/shared/models/yearly-paycheck.model';
-
 
 @Component({
   selector: 'benefit-calculator',
@@ -18,20 +16,18 @@ export class BenefitCalculatorComponent {
   dependentCollection: Dependent[];
   employee: Employee;
   hasCalculated : boolean = false;
-  grossPay : number = 2000;
-  grossYearlyPay : number;;
+  grossPayPerPaycheck : number = 2000;
+  grossYearlyPay : number;
   insuredEntities : InsuredEntity[];
   newDependentName = "";
   numberOfPaychecksPerYear : number  = 26;
-  paycheckInfo : YearlyPaycheck;
   showDuplicateDependentError: boolean;
 
   constructor(private benefitCalculatorService: BenefitCalculatorService) {
     this.insuredEntities = [];
     this.dependentCollection = [];
-    this.paycheckInfo = new YearlyPaycheck(this.grossPay, this.numberOfPaychecksPerYear);
-    this.employee = new Employee("", this.paycheckInfo)
-    this.grossYearlyPay = this.numberOfPaychecksPerYear * this.grossPay;
+    this.employee = new Employee("", this.numberOfPaychecksPerYear, this.grossPayPerPaycheck);
+    this.grossYearlyPay = this.numberOfPaychecksPerYear * this.grossPayPerPaycheck;
   }
 
   addDependent() {

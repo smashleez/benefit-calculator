@@ -13,14 +13,25 @@
     <tr *ngFor="let insuredEntity of insuredEntities">
       <td>
         <span *ngIf="isSummaryView === true">{{ insuredEntity.name }}</span>
-        <input *ngIf="isSummaryView === false" type="text" class="form-control" placeholder="Name" id="employeeName"
-          name="employeeName" [(ngModel)]="insuredEntity.name" (keyup)="calculateGrid($event)">
+        <input *ngIf="isSummaryView === false" 
+          type="text" 
+          class="form-control" 
+          placeholder="Name" 
+          id="employeeName"
+          name="employeeName" 
+          [(ngModel)]="insuredEntity.name" 
+          (keyup)="calculateGrid($event)">
       </td>
       <td>{{ insuredEntity.costPerYear | currency:'USD':true:'1.2-2' }}</td>
       <td>(- {{ insuredEntity.discount | currency:'USD':true:'1.2-2' }})</td>
       <td>{{ insuredEntity.costAfterDiscountsPerYear | currency:'USD':true:'1.2-2'}}</td>
       <td>{{ insuredEntity.costPerPaycheck | currency:'USD':true:'1.2-2' }}</td>
-      <td *ngIf="isDependentView"><button class="btn btn-link" (click)="remove(insuredEntity)"><small>Remove</small></button></td>
+      <td *ngIf="isDependentView">
+        <button class="btn btn-link"
+          (click)="remove(insuredEntity)">
+          <small>Remove</small>
+        </button>
+      </td>
     </tr>
   </tbody>
   <tfoot>
